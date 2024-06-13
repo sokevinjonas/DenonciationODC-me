@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('commentaires', function (Blueprint $table) {
             $table->id();
+            $table->string('contenu');
+            $table->foreignId('reponse_id')->constrained('commentaires');
+            // id de l'utilisateur qui fait le commentaire
+            $table->foreignId('user_id')->constrained('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('temoignages', function (Blueprint $table) {
             $table->id();
+            $table->text('contenu')->nullable();
+            $table->text('retro_action')->nullable();
+            $table->integer('like')->default(0);
+            $table->integer('dislike')->default(0);
+            $table->integer('partage')->default(0);
+            $table->string('lien_preuve')->nullable();
+            $table->enum('type_preuve', ['audio', 'video', 'image'])->nullable();
+            // id de du moderateur qui a fait la retroaction
+            $table->foreignId('moderateur_retro_action_id')->nullable()->constrained('users');
+            // id de l'utilisateur qui cree le temoignage
+            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('type_administrations', function (Blueprint $table) {
             $table->id();
+            $table->string('libelle');
+            // id du moderateur qui a cree le type d'administration
+            $table->foreignId('moderateur_id')->constrained('users');
             $table->timestamps();
         });
     }

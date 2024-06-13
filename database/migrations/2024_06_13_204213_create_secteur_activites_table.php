@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('secteur_activites', function (Blueprint $table) {
             $table->id();
+            $table->string('libelle');
+            // id du modetateur qui a cree le secterur d'activite
+            $table->foreignId('moderateur_id')->constrained('users');
             $table->timestamps();
         });
     }

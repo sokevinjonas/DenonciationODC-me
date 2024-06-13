@@ -15,12 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('prenom');
-            $table->string('pseudo');
-            $table->string('telephone');
+            $table->string('pseudo')->nullable();
+            $table->string('telephone')->unique();
+            $table->string('ref_cnib')->unique();
             $table->enum('role',['moderateur','administrateur','utilisateur'])->default('utilisateur');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // l'id de l'admin qui cree le moderateur
+            $table->foreignId('admin_id')->references('id')->on('users');
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('signals', function (Blueprint $table) {
             $table->id();
+            $table->text('description');
+            // id de l'utilisateur qui a fait le signal
+            $table->foreignId('user_id')->constrained('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
