@@ -18,4 +18,8 @@ class SecteurActivite extends Model
     public function entreprises(){
         return $this->hasMany(Entreprise::class, 'secteur_activites_id', 'id');
     }
+
+    public function moderateur(){
+        return $this->belongsTo(User::class, 'moderateur_id', 'id');
+    }
 }

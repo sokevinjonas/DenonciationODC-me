@@ -65,4 +65,8 @@ class User extends Authenticatable
     public function entreprises(){
         return $this->hasMany(Entreprise::class, 'moderateur_id', 'id');
     }
+
+    public function secteursActivite(){
+        return $this->hasMany(SecteurActivite::class, 'moderateur_id', 'id');
+    }
 }
