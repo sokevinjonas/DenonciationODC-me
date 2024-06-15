@@ -33,7 +33,6 @@ class StoreUserRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => ['required', 'confirmed', Password::defaults()],
             'admin_id' => 'nullable|exists:users,id',
-            // 'supprimer_par_id' => 'nullable|exists:users,id',
         ];
     }
 
@@ -58,7 +57,6 @@ class StoreUserRequest extends FormRequest
             'password.min' => 'Le mot de passe doit contenir au moins 8 caractères.',
             'password.confirmed' => 'Les mots de passe ne correspondent pas.',
             'admin_id.exists' => 'L\'admin spécifié n\'existe pas.',
-            // 'supprimer_par_id.exists' => 'L\'utilisateur spécifié pour la suppression n\'existe pas.',
             'role.required' => 'Le champ rôle est obligatoire.',
             'role.in' => 'Le rôle spécifié est invalide.',
         ];
