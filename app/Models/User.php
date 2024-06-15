@@ -45,4 +45,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function creerPar(){
+        return $this->belongsTo(User::class, 'admin_id', 'id');
+    }
+
+    public function retroActions(){
+        return $this->hasMany(Temoignage::class, 'moderateur_retro_action_id', 'id');
+    }
+
+    public function temoignages(){
+        return $this->hasMany(Temoignage::class, 'user_id', 'id');
+    }
 }
