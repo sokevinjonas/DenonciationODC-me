@@ -15,4 +15,14 @@ class Signal extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function temoignage()
+    {
+        return $this->belongsTo(Temoignage::class, 'temoignage_id', 'id');
+    }
 }

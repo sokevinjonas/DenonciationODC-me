@@ -69,4 +69,8 @@ class User extends Authenticatable
     public function secteursActivite(){
         return $this->hasMany(SecteurActivite::class, 'moderateur_id', 'id');
     }
+
+    public function signals(){
+        return $this->hasMany(User::class, 'user_id', 'id');
+    }
 }
