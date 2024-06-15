@@ -27,4 +27,9 @@ class Entreprise extends Model
         return $this->belongsTo(Temoignage::class, 'temoignage_id', 'id');
     }
 
+
+    public function moderateur(){
+        return $this->belongsTo(User::class, 'moderateur_id', 'id');
+    }
+
 }
