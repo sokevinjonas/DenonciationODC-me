@@ -57,4 +57,8 @@ class User extends Authenticatable
     public function temoignages(){
         return $this->hasMany(Temoignage::class, 'user_id', 'id');
     }
+
+    public function commentaires(){
+        return $this->hasMany(Commentaire::class, 'user_id', 'id');
+    }
 }

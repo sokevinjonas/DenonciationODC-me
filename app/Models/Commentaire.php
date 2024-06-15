@@ -15,4 +15,16 @@ class Commentaire extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function reponses(){
+         return $this->hasMany(Commentaire::class, 'reponse_id', 'id');
+    }
+
+    public function creePar(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function temoignage(){
+        return $this->belongsTo(Temoignage::class, 'temoignage_id', 'id');
+    }
 }
