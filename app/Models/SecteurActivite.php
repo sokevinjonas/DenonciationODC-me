@@ -14,4 +14,8 @@ class SecteurActivite extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function entreprises(){
+        return $this->hasMany(Entreprise::class, 'secteur_activites_id', 'id');
+    }
 }

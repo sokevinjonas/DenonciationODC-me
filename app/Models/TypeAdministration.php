@@ -14,4 +14,8 @@ class TypeAdministration extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function entreprises(){
+        return $this->hasMany(Entreprise::class, 'type_administration_id', 'id');
+    }
 }

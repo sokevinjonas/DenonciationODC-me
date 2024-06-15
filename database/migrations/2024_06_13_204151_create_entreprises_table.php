@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->foreignId('temoignage_id')->constrained('temoignages');
+            $table->foreignId('type_administration_id')->constrained('type_administrations');
+            $table->foreignId('secteur_activites_id')->constrained('secteur_activites');
             $table->timestamps();
         });
     }
