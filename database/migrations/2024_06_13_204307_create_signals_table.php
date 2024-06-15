@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('description');
             // id de l'utilisateur qui a fait le signal
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('temoignage_id')->constrained('temoignages');
             $table->softDeletes();
             $table->timestamps();
         });

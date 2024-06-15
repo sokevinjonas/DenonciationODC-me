@@ -15,4 +15,24 @@ class Temoignage extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function commentaires(){
+        return $this->hasMany(Commentaire::class, 'temoignage_id', 'id');
+    }
+
+    public function entreprise(){
+        return $this->hasOne(Entreprise::class, 'temoignage_id', 'id');
+    }
+
+    public function signals(){
+        return $this->hasMany(Signal::class, 'temoignage_id', 'id');
+    }
+
+    public function creePar(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function retroActionPar(){
+        return $this->belongsTo(User::class, 'moderateur_retro_action_id', 'id');
+    }
 }

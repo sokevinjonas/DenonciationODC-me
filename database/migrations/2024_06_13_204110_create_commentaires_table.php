@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('reponse_id')->nullable()->constrained('commentaires');
             // id de l'utilisateur qui fait le commentaire
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('temoignage_id')->constrained('temoignages');
             $table->softDeletes();
             $table->timestamps();
         });
