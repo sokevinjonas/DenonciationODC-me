@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             // l'id de l'admin qui cree le moderateur
-            $table->foreignId('admin_id')->references('id')->on('users');
+            $table->foreignId('admin_id')->nullable()->constrained('users');
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
