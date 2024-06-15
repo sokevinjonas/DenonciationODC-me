@@ -77,4 +77,8 @@ class User extends Authenticatable
     public function temoignageSupprimer(){
         return $this->hasMany(Temoignage::class, 'supprimer_par_id', 'id');
     }
+
+    public function supprimerPar(){
+        return $this->belongsTo(User::class, 'supprimer_par_id', 'id');
+    }
 }

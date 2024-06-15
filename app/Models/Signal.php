@@ -25,4 +25,8 @@ class Signal extends Model
     {
         return $this->belongsTo(Temoignage::class, 'temoignage_id', 'id');
     }
+
+    public function supprimerPar(){
+        return $this->belongsTo(User::class, 'supprimer_par_id', 'id');
+    }
 }

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('password');
             // l'id de l'admin qui cree le moderateur
             $table->foreignId('admin_id')->nullable()->constrained('users');
+            $table->foreignId('supprimer_par_id')->nullable()->constrained('users');
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
