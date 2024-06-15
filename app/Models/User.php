@@ -73,4 +73,8 @@ class User extends Authenticatable
     public function signals(){
         return $this->hasMany(User::class, 'user_id', 'id');
     }
+
+    public function temoignageSupprimer(){
+        return $this->hasMany(Temoignage::class, 'supprimer_par_id', 'id');
+    }
 }

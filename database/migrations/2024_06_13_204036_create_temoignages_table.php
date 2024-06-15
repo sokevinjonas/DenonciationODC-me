@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('moderateur_retro_action_id')->nullable()->constrained('users');
             // id de l'utilisateur qui cree le temoignage
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('supprimer_par_id')->nullable()->constrained('users');
             $table->softDeletes();
             $table->timestamps();
         });

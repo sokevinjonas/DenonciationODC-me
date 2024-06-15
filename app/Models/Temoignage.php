@@ -35,4 +35,8 @@ class Temoignage extends Model
     public function retroActionPar(){
         return $this->belongsTo(User::class, 'moderateur_retro_action_id', 'id');
     }
+
+    public function supprimerPar(){
+        return $this->belongsTo(User::class, 'supprimer_par_id', 'id');
+    }
 }
