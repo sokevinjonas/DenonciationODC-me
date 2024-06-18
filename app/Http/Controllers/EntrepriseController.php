@@ -2,65 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Entreprise;
 use App\Http\Requests\StoreEntrepriseRequest;
-use App\Http\Requests\UpdateEntrepriseRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\Entreprise;
+use Illuminate\Http\Request;
 
 class EntrepriseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $entreprises = Entreprise::all();
+        return view('entreprises.index', compact('entreprises'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('entreprises.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreEntrepriseRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['moderateur_id'] = auth()->user()->id;
+        Entreprise::create($data);
+        return redirect()->route('entreprises.index')->with('success', 'Entreprise créée avec succès.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Entreprise $entreprise)
     {
-        //
+        return view('entreprises.show', compact('entreprise'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Entreprise $entreprise)
     {
-        //
+        return view('entreprises.edit', compact('entreprise'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateEntrepriseRequest $request, Entreprise $entreprise)
+    public function update(UpdateUserRequest $request, Entreprise $entreprise)
     {
-        //
+        $entreprise->update($request->validated());
+        return redirect()->route('entreprises.index')->with('success', 'Entreprise mise à jour avec succès.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Entreprise $entreprise)
     {
-        //
+        $entreprise->delete();
+        $entreprise->update([
+            'supprimer_par_id' => auth()->user()->id ?? 2
+        ]);
+        return redirect()->route('entreprises.index')->with('success', 'Entreprise supprimée avec succès.');
     }
 }
