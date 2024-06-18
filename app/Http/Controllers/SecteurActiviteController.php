@@ -2,65 +2,52 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\SecteurActivite;
+use App\Http\Requests\SecteurActiviteRequest;
 use App\Http\Requests\StoreSecteurActiviteRequest;
 use App\Http\Requests\UpdateSecteurActiviteRequest;
 
 class SecteurActiviteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $secteurActivites = SecteurActivite::all();
+        return view('secteurActivites.index', compact('secteurActivites'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('secteurActivites.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreSecteurActiviteRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['moderateur_id'] = auth()->user()->id;
+        SecteurActivite::create($data);
+        return redirect()->route('secteurActivites.index')->with('success', 'Secteur d\'activité créé avec succès.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(SecteurActivite $secteurActivite)
     {
-        //
+        return view('secteurActivites.show', compact('secteurActivite'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(SecteurActivite $secteurActivite)
     {
-        //
+        return view('secteurActivites.edit', compact('secteurActivite'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateSecteurActiviteRequest $request, SecteurActivite $secteurActivite)
     {
-        //
+        $secteurActivite->update($request->validated());
+        return redirect()->route('secteurActivites.index')->with('success', 'Secteur d\'activité mis à jour avec succès.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(SecteurActivite $secteurActivite)
     {
-        //
+        $secteurActivite->delete();
+        return redirect()->route('secteurActivites.index')->with('success', 'Secteur d\'activité supprimé avec succès.');
     }
 }
