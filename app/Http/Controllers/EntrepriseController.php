@@ -13,7 +13,9 @@ class EntrepriseController extends Controller
      */
     public function index()
     {
-        //
+
+        $entreprises = entreprise::all();
+        return view('entreprises.index', compact('entreprises'));
     }
 
     /**
@@ -21,23 +23,22 @@ class EntrepriseController extends Controller
      */
     public function create()
     {
-        //
+        return view('entreprise.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(StoreEntrepriseRequest $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required',
+
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Entreprise $entreprise)
     {
-        //
+        return show('entreprise.show');
     }
 
     /**
@@ -45,7 +46,7 @@ class EntrepriseController extends Controller
      */
     public function edit(Entreprise $entreprise)
     {
-        //
+        return edit('entreprise.edit');
     }
 
     /**
@@ -53,14 +54,13 @@ class EntrepriseController extends Controller
      */
     public function update(UpdateEntrepriseRequest $request, Entreprise $entreprise)
     {
-        //
+      return update('entreprise.update');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Entreprise $entreprise)
     {
-        //
+        $entreprise->delete();
+        return redirect()->route('entreprises.index');
     }
 }

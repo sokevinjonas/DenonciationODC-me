@@ -13,7 +13,8 @@ class TypeAdministrationController extends Controller
      */
     public function index()
     {
-        //
+        $typeAdministrations = typeAdministration::all();
+        return view('typeAdministrations.index', compact('typeAdministrations'));
     }
 
     /**
@@ -21,7 +22,7 @@ class TypeAdministrationController extends Controller
      */
     public function create()
     {
-        //
+        return create('typeAdministration.create');
     }
 
     /**
@@ -32,35 +33,25 @@ class TypeAdministrationController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(TypeAdministration $typeAdministration)
     {
-        //
+        return show('typeAdministration.show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(TypeAdministration $typeAdministration)
     {
-        //
+        return edit('typeAdministration.edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateTypeAdministrationRequest $request, TypeAdministration $typeAdministration)
     {
-        //
+        return update('typeAdministration.update');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(TypeAdministration $typeAdministration)
     {
-        //
+        return destroy('typeAdministration.delete');
     }
 }

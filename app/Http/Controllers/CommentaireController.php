@@ -13,54 +13,54 @@ class CommentaireController extends Controller
      */
     public function index()
     {
-        //
+        $commentaires = commentaire::all();
+        return view('commentaires.index', compact('commentaires'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        return view('commentaires.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(StoreCommentaireRequest $request)
     {
-        //
+        $request->validate([
+            'titre' => 'required',
+            'contenu' => 'required',
+        ]);
+        commentaire::create($request->all());
+        return redirect()->route('commentaires.index')->with('success', 'commentaire creer avec succes.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Commentaire $commentaire)
     {
-        //
+        return view('commentaires.show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Commentaire $commentaire)
     {
-        //
+        return view('commentaires.edit', compact('commentaire'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(UpdateCommentaireRequest $request, Commentaire $commentaire)
     {
-        //
+        $request->validate([
+            'titre' => 'required',
+            'contenu' => 'required',
+        ]);
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+   
     public function destroy(Commentaire $commentaire)
     {
-        //
+        $commentaire->delete();
+        return redirect()->route('commentaires.index')->with('success', 'commentaire supprimé.');
     }
-}
+    }
+

@@ -34,3 +34,4 @@ class Commentaire extends Model
         return $this->belongsTo(User::class, 'supprimer_par_id', 'id');
     }
 }
+
