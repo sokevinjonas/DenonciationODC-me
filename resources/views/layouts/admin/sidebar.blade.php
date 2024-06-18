@@ -20,7 +20,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="moderateur-layouts.html">
+                    <a href="{{ route('users.index') }}">
                         <i class="bi bi-circle"></i><span>Liste</span>
                     </a>
                 </li>

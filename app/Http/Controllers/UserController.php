@@ -15,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('admin.moderateur.index', compact('users'));
     }
 
     /**
@@ -43,7 +44,7 @@ class UserController extends Controller
             'role' =>   'moderateur'
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'utilisateur creer');
+        return redirect()->route('users.index')->with('success', 'utilisateur creer');
     }
 
     /**
@@ -59,7 +60,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.moderateur.edit', compact('user'));
     }
 
     /**
@@ -73,12 +74,10 @@ class UserController extends Controller
             'pseudo' => $request->pseudo,
             'telephone' => $request->telephone,
             'ref_cnib' => $request->ref_cnib,
-            'role' => 'utilisateur',
             'email' => $request->email,
-            'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'utilisateur modifier');
+        return redirect()->route('users.index')->with('success', 'utilisateur modifier');
     }
 
     /**
@@ -87,7 +86,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        $user->update(['supprimer_par_id' => auth()->user()->id]);
 
-        return redirect()->route('dashboard')->with('success', 'utilisateur suppimer');
+        return redirect()->route('users.index')->with('success', 'utilisateur suppimer');
     }
 }
