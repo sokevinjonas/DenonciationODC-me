@@ -3,64 +3,65 @@
 namespace App\Http\Controllers;
 
 use App\Models\Signal;
-use App\Http\Requests\StoreSignalRequest;
-use App\Http\Requests\UpdateSignalRequest;
+use Illuminate\Http\Request;
 
 class SignalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $signals = Signal::all();
+        return view('signals.index', compact('signals'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('signals.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreSignalRequest $request)
+    public function store(Request $request)
     {
-        //
+        $data  = $request->validate([
+            'description' => 'required',
+            // 'user_id' => 'required|exists:users,id',
+            'temoignage_id' => 'required|exists:temoignages,id',
+            // 'supprimer_par_id' => 'nullable|exists:users,id',
+        ]);
+
+        $data['user_id'] = auth()->user()->id;
+
+        Signal::create($data);
+        return redirect()->route('signals.index')->with('success', 'Signal créé avec succès.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Signal $signal)
     {
-        //
+        return view('signals.show', compact('signal'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Signal $signal)
     {
-        //
+        return view('signals.edit', compact('signal'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateSignalRequest $request, Signal $signal)
+    public function update(Request $request, Signal $signal)
     {
-        //
+        $data  = $request->validate([
+            'description' => 'required',
+            // 'user_id' => 'required|exists:users,id',
+            'temoignage_id' => 'required|exists:temoignages,id',
+            // 'supprimer_par_id' => 'nullable|exists:users,id',
+        ]);
+
+        $signal->update($data);
+        return redirect()->route('signals.index')->with('success', 'Signal mis à jour avec succès.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Signal $signal)
     {
-        //
+        $signal->delete();
+        $signal->update([
+            'supprimer_par_id' => auth()->user()->id
+        ]);
+        return redirect()->route('signals.index')->with('success', 'Signal supprimé avec succès.');
     }
 }

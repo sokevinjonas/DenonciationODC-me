@@ -9,20 +9,30 @@ class StoreSignalRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'description' => 'required',
+            // 'user_id' => 'required|exists:users,id',
+            'temoignage_id' => 'required|exists:temoignages,id',
+            // 'supprimer_par_id' => 'nullable|exists:users,id',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'description.required' => 'La description est obligatoire.',
+            'user_id.required' => 'L\'utilisateur est obligatoire.',
+            'user_id.exists' => 'L\'utilisateur sélectionné est invalide.',
+            'temoignage_id.required' => 'Le témoignage est obligatoire.',
+            'temoignage_id.exists' => 'Le témoignage sélectionné est invalide.',
+            'supprimer_par_id.exists' => 'L\'utilisateur sélectionné pour la suppression est invalide.',
         ];
     }
 }
