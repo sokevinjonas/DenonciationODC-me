@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-
+        return view('admin.moderateur.create');
     }
 
     /**
@@ -37,7 +37,6 @@ class UserController extends Controller
             'pseudo' => $request->pseudo,
             'telephone' => $request->telephone,
             'ref_cnib' => $request->ref_cnib,
-            'role' => 'utilisateur',
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'admin_id' => auth()->user()->id,
@@ -52,7 +51,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('admin.moderateur.create');
     }
 
     /**
@@ -80,7 +79,6 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('dashboard')->with('success', 'utilisateur modifier');
-
     }
 
     /**

@@ -3,7 +3,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="index.html">
+            <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -15,7 +15,7 @@
             </a>
             <ul id="moderateur-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="moderateur-elements.html">
+                    <a href="{{ route('users.create') }}">
                         <i class="bi bi-circle"></i><span>Ajouter</span>
                     </a>
                 </li>

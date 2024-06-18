@@ -29,10 +29,10 @@ class StoreUserRequest extends FormRequest
             'pseudo' => 'nullable|string|max:255',
             'telephone' => 'required|string|max:20|unique:users,telephone',
             'ref_cnib' => 'required|string|max:50|unique:users,ref_cnib',
-            'role' => 'sometime|in:moderateur,administrateur,utilisateur',
+            // 'role' => 'sometime|in:moderateur,administrateur,utilisateur',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => ['required', 'confirmed', Password::defaults()],
-            'admin_id' => 'nullable|exists:users,id',
+            // 'admin_id' => 'nullable|exists:users,id',
         ];
     }
 
