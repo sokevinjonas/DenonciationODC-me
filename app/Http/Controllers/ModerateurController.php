@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
-class UserController extends Controller
+class ModerateurController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::where('role', 'utilisateur')->get();
-        return view('admin.user.index', compact('users'));
+        $users = User::where('role', 'moderateur')->get();
+        return view('admin.moderateur.index', compact('users'));
     }
 
     /**
@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        //
     }
 
     /**
@@ -32,7 +32,19 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        User::create([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'pseudo' => $request->pseudo,
+            'telephone' => $request->telephone,
+            'ref_cnib' => $request->ref_cnib,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'admin_id' => auth()->user()->id,
+            'role' =>   'moderateur'
+        ]);
 
+        return redirect()->route('users.index')->with('success', 'utilisateur creer');
     }
 
     /**
@@ -40,7 +52,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.user.create');
+        return view('admin.moderateur.create');
     }
 
     /**
@@ -48,7 +60,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.user.edit', compact('user'));
+        return view('admin.moderateur.edit', compact('user'));
     }
 
     /**
