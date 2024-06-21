@@ -6,6 +6,7 @@ use App\Http\Controllers\SignalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EntrepriseController;
+use App\Http\Controllers\ModerateurController;
 use App\Http\Controllers\SecteurActiviteController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('entreprises', EntrepriseController::class);
     Route::resource('secteurActivites', SecteurActiviteController::class);
     Route::resource('signals', SignalController::class);
+    Route::resource('moderateurs', ModerateurController::class);
 });
 
 
