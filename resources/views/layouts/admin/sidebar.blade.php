@@ -20,7 +20,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('users.index') }}">
+                    <a href="{{ route('users.index', ['role' => 'moderateur']) }}">
                         <i class="bi bi-circle"></i><span>Liste</span>
                     </a>
                 </li>

@@ -15,7 +15,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        switch (request('role')) {
+            case 'moderateur':
+                $users = User::where('role', 'moderateur')->get();
+                break;
+            case 'utilisateur':
+                $users = User::where('role', 'utilisateur')->get();
+                break;
+            default:
+                $users = User::all();
+                break;
+        }
         return view('admin.moderateur.index', compact('users'));
     }
 
