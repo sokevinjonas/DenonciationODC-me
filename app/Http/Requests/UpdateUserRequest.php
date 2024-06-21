@@ -26,12 +26,12 @@ class UpdateUserRequest extends FormRequest
             'nom' => 'sometimes|required|string|max:255',
             'prenom' => 'sometimes|required|string|max:255',
             'pseudo' => 'nullable|string|max:255',
-            'telephone' => 'sometimes|required|string|max:20|unique:users,telephone,' . $this->user,
-            'ref_cnib' => 'sometimes|required|string|max:50|unique:users,ref_cnib,' . $this->user,
-            'role' => 'sometimes|in:moderateur,administrateur,utilisateur',
-            'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $this->user,
-            'password' => ['nullable', 'confirmed', Password::defaults()],
-            'admin_id' => 'nullable|exists:users,id',
+            'telephone' => 'sometimes|required|string|max:20|unique:users,telephone,' . $this->user->id,
+            'ref_cnib' => 'sometimes|required|string|max:50|unique:users,ref_cnib,' . $this->user->id,
+            // 'role' => 'sometimes|in:moderateur,administrateur,utilisateur',
+            'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $this->user->id,
+            // 'password' => ['nullable', 'confirmed', Password::defaults()],
+            // 'admin_id' => 'nullable|exists:users,id',
         ];
     }
 
